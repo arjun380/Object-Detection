@@ -1,13 +1,11 @@
 objectDector= "";
 
-img= "";
+
+
 objects = [];
 flag = "";
 
 
-function preload(){
-    img = loadImage('dog_cat.jpg');
-}
 
 function setup() {
     canvas = createCanvas(640, 420);
@@ -34,7 +32,21 @@ function gotResult(error, results) {
 
 function draw() {
     image(img, 0, 0, 640, 420);
-    fill(255, 0, 0);
+
+    if(flag ="true")
+    {
+        for (var i = 0; i < objects.length; i++) {
+            document.getElementById("status").innerHTML = "Status : Object Detected";
+
+            fill(255, 0, 0);
+            percent = floor(objects[i].confidence * 100);
+            text(objects[i].label + " " + percent + "%", objects[i].x + 30, objects[i].y + 30);
+            noFill();
+            stroke(255, 0, 0);
+            rect(objects[i].x, objects[i].y, objects[i].width, objects[i].height);
+        }
+    }
+    /*fill(255, 0, 0);
     text("Dog 77%", 45, 75);
     noFill();
     stroke(255, 0, 0);
@@ -44,5 +56,5 @@ function draw() {
     text("Cat 91%", 320, 120);
     noFill();
     stroke("#FF0000");
-    rect(300, 90, 270, 320);
+    rect(300, 90, 270, 320);*/
 }
